@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>Triviadojo | <%= yield :title %> </title>
+	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	  <%= csrf_meta_tags %>
+	  <%= yield :script %> 
+	</head>
+	<body>
+		<%= render 'layouts/header' %>
+		<div class="container">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>"><%= value %></div>
+        <% end %>
+    </div>
+		<%= yield %>
+	</body>
+	<footer>
+	<%= render 'layouts/footer' %>
+	</footer>	
+</html>
