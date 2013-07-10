@@ -1,8 +1,16 @@
 Triviadojo::Application.routes.draw do
-
+  resources :users
+  resources :questions
+  
+  resources :sessions, :only => [:new, :create, :destroy]
   get "static_pages/home"
 
   root to: 'static_pages#home'
+  get '/signup',  to: 'users#new'
+  get '/users/:id', to: 'users#show' , as: :show_path
+  get '/about',   to: 'static_pages#about'
+  get "/signin",  to: 'sessions#new'
+  delete "/signout", to: 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -2,7 +2,27 @@
 @import "bootstrap-responsive";
 
 
-/* Navigation Bar 
+/* UNIVERSAL
+-------------------------------------------------- */
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+/* NAVIGATION BAR
 --------------------------------------------*/
 
 .navbar {
@@ -16,9 +36,15 @@
 		padding: 15px 20px;
     font-size: 1.1em;
 	}
+  .divider-vertical {
+    height: 50px;
+  }
+  .navbar-form {
+    margin-top: 5px;
+  }
 }
 
-/* Home Page
+/* HOME PAGE
 -------------------------------------------------- */
 
 /* CUSTOMIZE THE CAROUSEL */
@@ -81,8 +107,42 @@
   font-size: 20px;
 }
 
+/* SIGN UP & SIGN IN
+-------------------------------------------------- */
 
-/* Footer
+.sign_up .sign_in {
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+} 
+
+/* FOOTER
 -------------------------------------------------- */
 
 footer{
