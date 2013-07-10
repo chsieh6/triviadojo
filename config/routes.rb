@@ -1,4 +1,6 @@
 Triviadojo::Application.routes.draw do
+  get "games/new"
+  post "games/play", to: "games#play"
   resources :users
   resources :questions
   

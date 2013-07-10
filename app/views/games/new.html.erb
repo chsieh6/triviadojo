@@ -1,0 +1,35 @@
+<% provide(:title, 'Play Game!') %>
+
+<div class="container game_selection">
+	<div class="row">
+		<div class="span7 offset2">
+			<form action="/games/play" method="post">
+				<legend><strong>Select your category and length of the trivia</strong></legend>
+				<div class="row">
+					<div class="span3">
+						<h3>Category</h3>
+						<select name="category">
+							<option value="sports">Sports</option>
+							<option value="pop_culture">Pop Culture</option>
+							<option value="history">History</option>
+							<option value="News">News</option>
+							<option value="Movies">Movies</option>
+						</select>
+					</div>
+					<div class="span3 offset1">
+						<h3>Number of Questions</h3>
+						<select name="number_of_questions">
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+						</select>
+					</div>
+				</div>
+				<br/>
+				<input name="authenticity_token" type="hidden" value="token_value">
+				<input type="submit" value="Let's get started!" class="btn btn-large btn-block btn-primary">
+			</form>
+		</div>
+	</div>
+</div>
