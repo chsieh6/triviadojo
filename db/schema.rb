@@ -11,7 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130708072404) do
+ActiveRecord::Schema.define(version: 20130710215133) do
+
+  create_table "answers", force: true do |t|
+    t.string   "content"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", force: true do |t|
+    t.string   "content"
+    t.integer  "correct_answer_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "scores", force: true do |t|
+    t.integer  "number_correct"
+    t.integer  "number_attempted"
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "scores", ["user_id", "category_id"], name: "index_scores_on_user_id_and_category_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"
