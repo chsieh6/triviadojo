@@ -1,7 +1,129 @@
+<% provide(:title, 'Profile') %>
+<% content_for :javascript do %>
+	<script type="text/javascript">
+		$(document).ready(function(){
+	    $('#myTab a:first').tab('show');
+		});
+	</script>
+<% end %>
+
 <div class="container">
 	<div class="row">
-		<div class="span12">
-			<h1>This is <%= @user.first_name %> <%= @user.last_name %>'s profile</h1>
+		<div class="span4">
+			<h3><%= @user.first_name %> <%= @user.last_name %>'s Profile</h3>
+			<p><b>Email:</b> <%= @user.email %> <%= link_to "Change", edit_user_path(current_user) %></p>
+			<p><b>Password</b> <%= link_to "Change", edit_user_path(current_user) %></p>
+			<p><b>Member Since:</b> <%= @user.created_at.strftime("%B %d, %Y") %></p>
+			<p><b>Number of Games Played:</b> 50</p>
+		</div>
+		<div class="span8">
+			<h2>Game History</h2><br/>
+			<ul class="nav nav-tabs" id="myTab">
+				<li class="active"><a href="#novice" data-toggle="tab">Novice</a></li>
+				<li><a href="#intermediate" data-toggle="tab">Intermediate</a></li>
+				<li><a href="#expert" data-toggle="tab">Expert</a></li>
+			</ul>
+			<div class="tab-content">
+			  <div class="tab-pane fade active in" id="novice">
+			  	<h3>Average Game Score: 87/100 <small>27 Games</small></h3>
+			  	<table class="table table-bordered">
+			  		<thead>
+			  			<tr>
+				  			<th>#</th>
+				  			<th>Score</th>
+				  			<th>Category</th>
+				  			<th>Time</th>
+				  		</tr>
+			  		</thead>
+			  		<tbody>
+			  			<tr>
+			  				<td>1</td>
+			  				<td>90/100</td>
+			  				<td>History</td>
+			  				<td>07/03/2013 12:56pm</td>
+			  			</tr>
+			  			<tr>
+			  				<td>2</td>
+			  				<td>80/100</td>
+			  				<td>Music</td>
+			  				<td>07/03/2013 12:56pm</td>
+			  			</tr>
+			  			<tr>
+			  				<td>3</td>	
+			  				<td>70/100</td>
+			  				<td>News</td>
+			  				<td>07/03/2013 12:56pm</td>
+			  			</tr>
+			  		</tbody>	
+			  	</table>
+			  </div>
+			  <div class="tab-pane fade" id="intermediate">
+			  	<h3>Average Game Score: 60/100 <small>10 Games</small></h3>
+			  	<table class="table table-bordered">
+			  		<thead>
+			  			<tr>
+				  			<th>#</th>
+				  			<th>Score</th>
+				  			<th>Category</th>
+				  			<th>Time</th>
+				  		</tr>
+			  		</thead>
+			  		<tbody>
+			  			<tr>
+			  				<td>1</td>
+			  				<td>60/100</td>
+			  				<td>Music</td>
+			  				<td>07/03/2013 12:56pm</td>
+			  			</tr>
+			  			<tr>
+			  				<td>2</td>
+			  				<td>50/100</td>
+			  				<td>Sports</td>
+			  				<td>07/03/2013 12:56pm</td>
+			  			</tr>
+			  			<tr>
+			  				<td>3</td>	
+			  				<td>40/100</td>
+			  				<td>Gossip</td>
+			  				<td>07/03/2013 12:56pm</td>
+			  			</tr>
+			  		</tbody>	
+			  	</table>
+			  </div>
+			  <div class="tab-pane fade" id="expert">
+			  	<h3>Average Game Score: 30/100 <small>5 Games</small></h3>
+			  	<table class="table table-bordered">
+			  		<thead>
+			  			<tr>
+				  			<th>#</th>
+				  			<th>Score</th>
+				  			<th>Category</th>
+				  			<th>Time</th>
+				  		</tr>
+			  		</thead>
+			  		<tbody>
+			  			<tr>
+			  				<td>1</td>
+			  				<td>30/100</td>
+			  				<td>History</td>
+			  				<td>07/03/2013 12:56pm</td>
+			  			</tr>
+			  			<tr>
+			  				<td>2</td>
+			  				<td>20/100</td>
+			  				<td>Music</td>
+			  				<td>07/03/2013 12:56pm</td>
+			  			</tr>
+			  			<tr>
+			  				<td>3</td>	
+			  				<td>10/100</td>
+			  				<td>News</td>
+			  				<td>07/03/2013 12:56pm</td>
+			  			</tr>
+			  		</tbody>	
+			  	</table>
+			  </div>
+			</div>
 		</div>
 	</div>
 </div>
