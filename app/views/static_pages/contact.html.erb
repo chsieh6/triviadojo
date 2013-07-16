@@ -1,0 +1,23 @@
+<% provide(:title, "Contact us") %>
+
+<div class="container contact_us">
+	<div class="page-header">
+  	<h1>Contact Us<small> got a question or feedback?</small></h1>
+	</div>
+	<div class="row">
+		<div class="span4 offset4">
+			<form action="/static_pages/submit" method="post">
+				Name: <input type="text" name="name">
+				Email: <input type="text" name="email">
+				Type: <select name="type">
+					<option value="general">General Question</option>
+					<option value="question">Add Question</option>
+					<option value="Feedback">Feedback</option>
+				</select>
+				<textarea name="message" cols="30" rows="10"></textarea>
+				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+				<input type="submit" value="Submit" class="btn btn-primary">
+			</form>
+		</div>
+	</div>
+</div>

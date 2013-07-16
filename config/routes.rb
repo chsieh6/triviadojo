@@ -6,11 +6,13 @@ Triviadojo::Application.routes.draw do
   
   resources :sessions, :only => [:new, :create, :destroy]
   get "static_pages/home"
+  post "static_pages/submit"
 
   root to: 'static_pages#home'
   get '/signup',  to: 'users#new'
   get '/users/:id', to: 'users#show' , as: :show_path
   get '/about',   to: 'static_pages#about'
+  get '/contact',   to: 'static_pages#contact'
   get "/signin",  to: 'sessions#new'
   delete "/signout", to: 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.
