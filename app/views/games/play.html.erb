@@ -1,4 +1,20 @@
 <% provide(:title, 'Play Game!') %>
+<% content_for :javascript do %>
+<script>
+var score = 0;
+function verifyAnswer(id) {
+	var x = id.value;
+	if (x == 1)
+	{
+		document.getElementById("notification"+x).innerHTML="You are correct!";
+	}
+	else
+	{
+		document.getElementById("notification"+x).innerHTML="Ooops wrong answer!";
+	}
+}
+</script>
+<% end %>
 
 <div class="container">
 	<div class="row">
@@ -8,10 +24,9 @@
 				<h3><%= q.content %></h3>
 				<form action="/games/play" method="post">
 					<% answers = q.answers.order('RANDOM()') %>
-					<% name = 'a' %>
 					<% answers.each do |a| %>
-						<input type="radio" name="<%= name %>" value="<%= a.id %>"><%= a.content %></br>
-						<% name.next! %>
+						<input id="answer" type="radio" name="answer" onclick="verifyAnswer(this)" value="<%= a.id %>"><%= a.content %></br>
+						<h4 id="notification<%=a.id%>"></h4>
 					<% end %>
 					<input name="authenticity_token" type="hidden" value="token_value">
 					<input type="submit" class="btn btn-primary">

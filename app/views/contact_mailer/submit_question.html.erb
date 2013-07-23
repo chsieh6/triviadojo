@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thank you for submitting a question!</h1>
+    <p><b>Once your question is approved, you will be the creater of question ID: </b><%= @question.id %></p>
+    <p><b>Category</b><%= @category %></p>
+    <p><b>Question:</b><br/><%= @question %></p>
+    <p><b>Answer:</b></p>
+    <ul>
+      <li><%= @answer.part1 %></li>
+      <li><%= @answer.part2 %></li>
+      <li><%= @answer.part3 %></li>
+      <li><%= @answer.part4 %></li>
+    </ul>
+    <br/>
+    <p>Thank you so much for being a part of the TriviaDojo community, we are here because of you!  Please continue to contribute and use TriviaDojo as your destination for trivia and custom quizzes.</p>
+    <br/>
+    <br/>
+    <p>TriviaDojo Feedback</p>
+  </body>
+</html>

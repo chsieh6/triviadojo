@@ -1,0 +1,31 @@
+<% provide(:title, 'New Question') %>
+
+<div class="container add_question">
+	<div class="page-header">
+  	<h1>Add a question<small> Make it awesome!</small></h1>
+	</div>
+	<div class="row">
+		<div class="span5 offset3">
+			<form action="/questions/create" method="post">
+				<label>Category:</label>
+				<select name="category">
+					<option value="sports">Sports</option>
+					<option value="pop_culture">Pop Culture</option>
+					<option value="history">History</option>
+					<option value="news">News</option>
+					<option value="movies">Movies</option>
+				</select>
+				<label>Question:</label>
+				<textarea name="question" cols="30" rows="8" placeholder="e.g: Who is NOT both a Heisman Trophy winner and a former number one overall pick in the NFL draft?"></textarea>
+				<label>Answers: <span style="color:red">(Four Answers are required*)<span></label>
+				<input type="text" name="answer[part1]" placeholder="Answer 1">
+				<input type="text" name="answer[part2]" placeholder="Answer 2">
+				<input type="text" name="answer[part3]" placeholder="Answer 3">
+				<input type="text" name="answer[part4]" placeholder="Answer 4">
+				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+				<input type="submit" value="Submit" class="btn btn-primary">
+			</form>
+		</div>
+	</div>
+</div>
+</div>

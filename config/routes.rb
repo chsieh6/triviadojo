@@ -13,6 +13,7 @@ Triviadojo::Application.routes.draw do
   get '/users/:id', to: 'users#show' , as: :show_path
   get '/about',   to: 'static_pages#about'
   get '/contact',   to: 'static_pages#contact'
+  get '/create',   to: 'static_pages#create'
   get "/signin",  to: 'sessions#new'
   delete "/signout", to: 'sessions#destroy'
   # The priority is based upon order of creation: first created -> highest priority.

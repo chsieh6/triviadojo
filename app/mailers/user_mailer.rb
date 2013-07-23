@@ -4,7 +4,7 @@ class UserMailer < ActionMailer::Base
   def welcome_email(user)
     @user = user
     @url  = 'http://triviadojo.com/signin'
-    mail(to: "@user.email", subject: 'Welcome to TriviaDojo!')
+    mail(to: "charles.hsieh6@gmail.com", subject: 'Welcome to TriviaDojo!')
   end
 
 end
