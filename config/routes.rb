@@ -3,6 +3,7 @@ Triviadojo::Application.routes.draw do
   post "games/play", to: "games#play"
   resources :users
   resources :questions
+  post "games/check_answer"
   
   resources :sessions, :only => [:new, :create, :destroy]
   get "static_pages/home"

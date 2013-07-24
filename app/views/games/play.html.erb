@@ -1,35 +1,31 @@
 <% provide(:title, 'Play Game!') %>
 <% content_for :javascript do %>
 <script>
-var score = 0;
-
-// function verifyAnswer () {
-// 	var x = this.value;
-// 	if (x == 1) {
-// 		document.getElementById("notification").innerHTML="You are correct!";
-// 		score += 1;
-// 	} else {
-// 		document.getElementById("notification").innerHTML="Ooops wrong answer!";
-// 	}
-// }
-
-function checkScore () {
-	return score;
-	document.getElementById("finalscore").innerHTML="Your final score is " + score;
-}
 
 $(document).ready(function() {
 
 	var score = 0;
+	
+	$('.answer').hover(function() {
+		$(this).css('opacity', .6);
+	}, function() {
+		$(this).css('opacity', 1);
+	});
 
-	$('.answer').click(function(){
-		var x = $(this).val();
-		if (x == 1) {
-			$('#notification').html("Correct!");
-			score += 1;
-		} else {
-			$('#notification').html("Wrong Answer!");
-		};
+	$('.answer').click(function() {
+		$(this).parents('div.questions').find('div.answer').off();
+		console.log($(this).siblings());
+		var form = $(this).parent('form');
+		$.post(form.attr('action'), form.serialize(), function(correct_answer) {
+			console.log(correct_answer);
+			if (correct_answer == 1) {
+				$('#notification').html("Correct!");
+				score += 1;
+			} else{
+				$('#notification').html("Wrong Answer!");
+			};
+  	}, "json");
+  	return false;
 	});
 
 	var question_index = 0;
@@ -38,12 +34,12 @@ $(document).ready(function() {
 	$('.questions').hide();
 	$('#question0').show();
 
-	$('#next').click(function(){
+	$('#next').click(function() {
 		$('.questions').hide();
 		$('#notification').html("");
 		question_index++;
 		if (question_index == question_count) {
-			$('#finalscore').html("Final score is: " + score);
+			$('#notification').html("Final score is: " + score + "/" + question_count);
 		} else {
 			var id = "#question" + question_index;
 			$(id).show();
@@ -61,20 +57,22 @@ $(document).ready(function() {
 			<h1><%= @category %> Trivia Game</h1>
 			<% question_index = 0 %>
 			<% @questions.each do |q| %>
-			<div id="question<%= question_index %>" class="questions">
-				<h3><%= q.content %></h3>
-				<form>
+				<div id="question<%= question_index %>" class="questions">
+					<h3><%= q.content %></h3>
 					<% answers = q.answers.order('RANDOM()') %>
 					<% answers.each do |a| %>
-						<input class="answer" type="radio" name="answer" value=<%= a.correct %>><%= a.content %></br>
+						<form action="/games/check_answer" method="post">
+							<div class="answer alert alert-block alert-info span4" style="cursor: pointer">
+								<input type="hidden" name="answer" value=<%= a.id %>>
+								<%= a.content %>
+							</div>
+							<input name="authenticity_token" type="hidden" value="token_value">
+						</form>
 					<% end %>
-					<input name="authenticity_token" type="hidden" value="token_value">
-				</form>
-			</div>
-			<% question_index += 1 %>
+				</div>
+				<% question_index += 1 %>
 			<% end %>
 			<h4 id="notification"></h4>
-			<h4 id="finalscore"></h4>
 		</div>
 		<button id="next" class="btn btn-primary">Next Question</button>
 	</div>
