@@ -15,7 +15,7 @@ $(document).ready(function() {
 			$.post(form.attr('action'), form.serialize(), function(data) {
 				$('#question_content').html(data.question.content);
 				for (var i = 0; i < 4; i++) {
-					answer = data.answers[i];
+					var answer = data.answers[i];
 					$('#answer_input' + i).val(answer.id);
 					$('#answer_content' + i).html(answer.content);
 				}
@@ -26,11 +26,6 @@ $(document).ready(function() {
 		}
 	}
 
-	$('#next').click(function() {
-		index++;
-		outputQuestion();
-	});
-
 	function attachAnswerEvents() {
 		$('.answer').css('opacity', 1);
 		$('.answer').on({
@@ -38,8 +33,10 @@ $(document).ready(function() {
 				checkAnswer($(this));
 			},
 			mouseenter: function() {
-				$(this).css('opacity', .5);
-				$(this).css('cursor', 'pointer');
+				$(this).css({
+					opacity: .5,
+					cursor: 'pointer'
+				});
 			},
 			mouseleave: function() {
 				$(this).css('opacity', 1);
@@ -48,8 +45,7 @@ $(document).ready(function() {
 	}
 
 	function checkAnswer(element) {
-		$('.answer').off();
-		$('.answer').css('cursor', 'auto');
+		$('.answer').off().css('cursor', 'auto');
 		var form = element.children();
 		$.post(form.attr('action'), form.serialize(), function(data) {
 			if (data) {
@@ -63,8 +59,12 @@ $(document).ready(function() {
 		});
 	}
 
+	$('#next').click(function() {
+		index++;
+		outputQuestion();
+	});
+	
 	outputQuestion();
-	attachAnswerEvents();
 
 });
 </script>

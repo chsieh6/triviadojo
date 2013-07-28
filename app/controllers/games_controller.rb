@@ -12,6 +12,7 @@ class GamesController < ApplicationController
       @@answers << a
       @@correct_answers << a.id if a.correct == 1
     end
+    @@answers.shuffle!
   end
 
   def get_question
