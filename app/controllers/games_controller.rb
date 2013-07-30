@@ -5,14 +5,30 @@ class GamesController < ApplicationController
 
   def play
   	@category = params[:category].capitalize
-  	@questions = Category.find_by(name: params[:category]).questions.order('RANDOM()').limit(params[:number_of_questions])
+    @count = params[:number_of_questions].to_i
+  	@@questions = Category.find_by(name: params[:category]).questions.sample(@count)
+    @@answers, @@correct_answers = [], []
+    Answer.where(question_id: @@questions.map(&:id)).each do |a|
+      @@answers << a
+      @@correct_answers << a.id if a.correct == 1
+    end
+    @@answers.shuffle!
   end
 
-  def check_answer
-  	@correct_answer = Answer.find(params[:answer]).correct
-  	respond_to do |format|
-      format.json { render json: @correct_answer }
+  def get_question
+    question = @@questions[params[:index].to_i]
+    data = { question: question }
+    data[:answers] = @@answers.select { |a| a.question_id == question.id }
+    respond_to do |format|
+      format.json { render json: data }
     end
   end
 
+  def check_answer
+    answer = params[:answer].to_i
+    data = @@correct_answers.include?(answer)
+  	respond_to do |format|
+      format.json { render json: data }
+    end
+  end
 end
