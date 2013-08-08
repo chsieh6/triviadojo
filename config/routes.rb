@@ -5,6 +5,7 @@ Triviadojo::Application.routes.draw do
   resources :questions
   post "games/check_answer"
   post "games/get_question"
+  post "games/submit_score"
   
   resources :sessions, :only => [:new, :create, :destroy]
   get "static_pages/home"

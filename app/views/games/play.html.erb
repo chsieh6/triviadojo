@@ -9,9 +9,20 @@ $(document).ready(function() {
 
 	function outputQuestion() {
 		if (index == count) {
+			<% if signed_in? %>
+				$('#number_correct').val(score);
+				$('#number_attempted').val(count);
+				$('#user_id').val(<%= current_user.id %>);
+				$('#category_id').val(<%= @category_id %>);
+				var form = $('#score_form');
+				$.post(form.attr('action'), form.serialize(), function() {
+				});
+			<% end %>
+			$('#question_content').empty();
+			$('#result').empty();
 			$('#question').html("<h3>Final score: " + score + "/" + count + "</h3>");
 		} else {
-			$('#question_index').val(index);
+			$('#index').val(index);
 			var form = $('#question_form');
 			$.post(form.attr('action'), form.serialize(), function(data) {
 				$('#question_content').html(data.question.content);
@@ -21,9 +32,9 @@ $(document).ready(function() {
 					$('#answer_content' + i).html(answer.content);
 				}
 			});
-			$('#notification').empty();
-			$('#notification').removeClass("alert alert-success alert-error");
+			$('#notification').empty().removeClass("alert alert-success alert-error");
 			attachAnswerEvents();
+			$('#button_div').empty();
 		}
 	}
 
@@ -58,13 +69,13 @@ $(document).ready(function() {
 				$('#notification').html("Wrong Answer!");
 			}
 		});
+		$('#button_div').html("<button id='next' class='btn btn-primary'>Next Question</button>");
+		$('#next').click(function() {
+			index++;
+			outputQuestion();
+		});
 	}
 
-	$('#next').click(function() {
-		index++;
-		outputQuestion();
-	});
-	
 	outputQuestion();
 
 });
@@ -73,16 +84,16 @@ $(document).ready(function() {
 
 <div class="container">
 	<div class="row">
-		<div class="span7 offset2">
-			<h1><%= @category %> Trivia Game</h1>
-			<div id="question">
+		<h1 id="game_title" class="span10 offset1"><%= @category %> Trivia Game</h1>
+		<h4 id="question_content" class="span4 offset1"></h4>
+		<div id="question" class="span4 offset1">
 				<form id="question_form" action="/games/get_question" method="post">
 					<input type="hidden" name="authenticity_token" value="token_value">
-					<input id="question_index" type="hidden" name="index">
+					<input id="index" type="hidden" name="index">
 				</form>
-				<h3 id="question_content"></h3>
+				
 				<% (0..3).each do |i| %>
-					<div class="answer alert alert-info span4">
+					<div class="answer alert alert-info">
 						<form action="/games/check_answer" method="post">
 							<input type="hidden" name="authenticity_token" value="token_value">
 							<input id="answer_input<%= i %>" type="hidden" name="answer">
@@ -90,8 +101,18 @@ $(document).ready(function() {
 						</form>
 					</div>
 				<% end %>
-				<button id="next" class="btn btn-primary">Next Question</button>
-				<h4 id="notification" class="span4 alert-block"></h4>
+
+				<form id="score_form" action="/games/submit_score" method="post">
+					<input type="hidden" name="authenticity_token" value="token_value">
+					<input id="number_correct" type="hidden" name="number_correct">
+					<input id="number_attempted" type="hidden" name="number_attempted">
+					<input id="user_id" type="hidden" name="user_id">
+					<input id="category_id" type="hidden" name="category_id">
+				</form>
+		</div>
+		<div id="result" class="span4 offset1">
+			<h4 id="notification" class="alert-block"></h4>
+			<div id="button_div">
 			</div>
 		</div>
 	</div>
