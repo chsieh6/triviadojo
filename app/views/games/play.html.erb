@@ -10,7 +10,8 @@ $(document).ready(function() {
 	function outputQuestion() {
 		if (index == count) {
 			$('#question').html("<h3>Final score: " + score + "/" + count + "</h3>");
-		} else {
+		} 
+		else {
 			$('#question_index').val(index);
 			var form = $('#question_form');
 			$.post(form.attr('action'), form.serialize(), function(data) {
@@ -27,7 +28,7 @@ $(document).ready(function() {
 		}
 	}
 
-	function attachAnswerEvents() {
+	function attachAnswerEvents() {	
 		$('.answer').css('opacity', 1);
 		$('.answer').on({
 			click: function() {

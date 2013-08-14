@@ -9,7 +9,7 @@ class ContactMailer < ActionMailer::Base
     mail(to: "charles.hsieh6@gmail.com", subject: 'Feedback from ' + name)
   end
 
-  def submit_question(category, question, answer)
+  def submit_question(email, category, question, answer)
   	@category = category
     @question = question
     @answer = answer

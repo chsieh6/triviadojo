@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_action :signed_in_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user,   only: [:show, :edit, :update]
   before_action :admin_user,     only: :destroy
 
 	def index
@@ -23,7 +23,11 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.find(params[:id])
+		@categories = Category.all
+		@scores = @user.scores
+		@total_correct = @scores.inject(0){ |sum, x| sum+x.number_correct}
+		@total_attempted = @scores.inject(0){ |sum, x| sum+x.number_attempted}
+		@average = @total_correct / @total_attempted.to_f * 100
 	end
 
 	def edit
@@ -48,7 +52,7 @@ class UsersController < ApplicationController
 	private
 
 	  def user_params
-	    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+	    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :avatar)
 	  end
 
 	  def correct_user

@@ -1,0 +1,27 @@
+<% provide(:title, 'Create a trivia!') %>
+
+<div class="container customer_games_new">
+	<div class="row">
+		<div class="span7 offset2">
+			<div class="page-header">
+				<h1>Create your own Trivia</h1>
+			</div>
+			<form action="/custom_games/content" method="post">
+				<div class="row">
+					<div class="span6">
+						<h2 style="color:orange">Step 1: Why create one?</h2><br/>
+						<h4>What is the category or occasion?</h4>
+						<input type="text" name="category" placeholder="Category or Occasion"><br/><br/>
+						<h4>Number of Questions</h4>
+						<input type="text" name="number_of_questions" placeholder="Up to 30"><br/><br/>
+						<h4>How much time per question?</h4>
+						<input type="text" name="time_per_question" placeholder="20 seconds?"><br/>
+					</div>
+				</div>
+				<br/>
+				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+				<input type="submit" value="Fill in the questions!" class="btn btn-large btn-primary">
+			</form>
+		</div>
+	</div>
+</div>

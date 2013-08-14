@@ -15,7 +15,4 @@ class StaticPagesController < ApplicationController
 		render 'contact'
 	end
 
-	def create
-	end
-
 end

@@ -1,0 +1,28 @@
+<% provide(:title, 'Create a trivia!') %>
+
+<div class="container customer_games_content">
+	<div class="row">
+		<div class="span7 offset2">
+			<div class="page-header">
+				<h1>Create your own Trivia</h1>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<form action="/customize_games/content" method="post">
+						<h2 style="color:orange">Step 2: What are your questions?</h2><br/>
+						<h3>Questions 1 of</h3><br/>
+						<h4>Content:</h4>
+						<textarea name="question" cols="30" rows="8" placeholder="e.g: Who is NOT both a Heisman Trophy winner and a former number one overall pick in the NFL draft?"></textarea>
+						<h4>Answers: <span style="color:red; font-size:12px">*In actual quiz the answers will be shuffled*</span></h4>
+						<span style="color:red; font-weight:bold">Correct Answer: </span><input class="answer_input" type="text" name="answer1" placeholder="Answer 1">
+						<span style="font-weight:bold">Wrong Answer: &nbsp;</span><input class="answer_input" type="text" name="answer2" placeholder="Answer 2">
+						<span style="font-weight:bold">Wrong Answer: &nbsp;</span><input class="answer_input" type="text" name="answer3" placeholder="Answer 3">
+						<span style="font-weight:bold">Wrong Answer: &nbsp;</span><input class="answer_input" type="text" name="answer4" placeholder="Answer 4"><br/><br/>
+						<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+						<input type="submit" value="Next" class="btn btn-large btn-primary">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
