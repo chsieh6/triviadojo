@@ -1,14 +1,14 @@
 Triviadojo::Application.routes.draw do
   get "custom_games/new"
   post "custom_games/content"
-
+  resources :users
+  resources :questions
   get "games/new"
   post "games/play", to: "games#play"
   post "games/check_answer"
   post "games/get_question"
+  post "games/submit_score"
 
-  resources :users
-  resources :questions
   resources :sessions, :only => [:new, :create, :destroy]
   
   get "static_pages/home"

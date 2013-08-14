@@ -5,8 +5,10 @@ class GamesController < ApplicationController
 
   def play
   	@category = params[:category].capitalize
+    cat = Category.find_by(name: params[:category])
+    @category_id = cat.id
     @count = params[:number_of_questions].to_i
-  	@@questions = Category.find_by(name: params[:category]).questions.sample(@count)
+  	@@questions = cat.questions.sample(@count)
     @@answers, @@correct_answers = [], []
     # This will do an for loop around the each individual answer base on the unique question id
     # @@question.map(&:id) is the same as @@question.map(|x| x.id).  Which create a separate array with only the question id
@@ -34,4 +36,20 @@ class GamesController < ApplicationController
       format.json { render json: data }
     end
   end
+
+  def submit_score
+    @score = Score.new(score_params)
+    if @score.save
+      data = ''
+      respond_to do |format|
+        format.json { render json: data }
+      end
+    end
+  end
+
+  private
+
+    def score_params
+      params.permit(:number_correct, :number_attempted, :user_id, :category_id)
+    end
 end
