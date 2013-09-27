@@ -21,14 +21,9 @@ $(document).ready(function() {
 			$('#question_content').empty();
 			$('#result').empty();
 			$('#question').html("<h3>Final score: " + score + "/" + count + "</h3>");
-<<<<<<< HEAD
 		} 
 		else {
-			$('#question_index').val(index);
-=======
-		} else {
 			$('#index').val(index);
->>>>>>> c145f2594ce0df2bc77753e745fc2a4be92f6580
 			var form = $('#question_form');
 			$.post(form.attr('action'), form.serialize(), function(data) {
 				$('#question_content').html(data.question.content);
